@@ -18,7 +18,7 @@ import java.util.Iterator;
 public class ConstantPool {
     private CPInfo[] pool;
 
-    ConstantPool(ClassReader cr) throws IOException, InvalidEntry {
+    public ConstantPool(ClassReader cr) throws IOException, InvalidEntry {
         int count = cr.readUnsignedShort();
         pool = new CPInfo[count];
         for (int i = 1; i < count; i++) {

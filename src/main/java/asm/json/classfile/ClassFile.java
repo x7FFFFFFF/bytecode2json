@@ -7,12 +7,14 @@
 package asm.json.classfile;
 
 import asm.json.classfile.constantpool.ConstantPool;
-import com.sun.org.apache.bcel.internal.classfile.AccessFlags;
+import asm.json.classfile.constantpool.exeptions.ConstantPoolException;
+
+
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class ClassFile {
-
-
-
     /*
                 ClassFile {
                 u4             magic;
@@ -33,6 +35,36 @@ public class ClassFile {
                 attribute_info attributes[attributes_count];
             }
         */
+
+    public ClassFile(InputStream in) throws IOException, ConstantPoolException {
+        ClassReader cr = new ClassReader(in);
+        magic = cr.readInt();
+        minor_version = cr.readUnsignedShort();
+        major_version = cr.readUnsignedShort();
+        constant_pool = new ConstantPool(cr);
+        access_flags = new AccessFlags(cr);
+        this_class = cr.readUnsignedShort();
+        super_class = cr.readUnsignedShort();
+
+        int interfaces_count = cr.readUnsignedShort();
+        interfaces = new int[interfaces_count];
+        for (int i = 0; i < interfaces_count; i++)
+            interfaces[i] = cr.readUnsignedShort();
+
+        int fields_count = cr.readUnsignedShort();
+        /*fields = new Field[fields_count];
+        for (int i = 0; i < fields_count; i++)
+            fields[i] = new Field(cr);
+
+        int methods_count = cr.readUnsignedShort();
+        methods = new Method[methods_count];
+        for (int i = 0; i < methods_count; i++)
+            methods[i] = new Method(cr);
+
+        attributes = new Attributes(cr);*/
+
+    }
+
     public  int magic;
     public  int minor_version;
     public  int major_version;

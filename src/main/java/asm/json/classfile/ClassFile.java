@@ -36,8 +36,8 @@ public class ClassFile {
             }
         */
 
-    public ClassFile(InputStream in) throws IOException, ConstantPoolException {
-        ClassReader cr = new ClassReader(in);
+    public ClassFile(ClassReader reader) throws IOException, ConstantPoolException {
+        ClassReader cr = reader;
         magic = cr.readInt();
         minor_version = cr.readUnsignedShort();
         major_version = cr.readUnsignedShort();

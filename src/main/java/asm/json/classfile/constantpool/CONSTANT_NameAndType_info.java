@@ -40,8 +40,8 @@ public   class CONSTANT_NameAndType_info extends CPInfo {
         return cp.getUTF8Value(type_index);
     }
 
-    public <R, D> R accept(Visitor<R, D> visitor, D data) {
-        return visitor.visitNameAndType(this, data);
+    public void accept(CPVisitor visitor) {
+        visitor.visitNameAndType(this);
     }
 
     @Override

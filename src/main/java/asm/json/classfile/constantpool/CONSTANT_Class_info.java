@@ -72,8 +72,8 @@ public class CONSTANT_Class_info extends CPInfo {
         return "CONSTANT_Class_info[name_index: " + name_index + "]";
     }
 
-    public <R, D> R accept(Visitor<R, D> visitor, D data) {
-        return visitor.visitClass(this, data);
+    public void  accept(CPVisitor visitor) {
+        visitor.visitClass(this);
     }
 
     public final int name_index;

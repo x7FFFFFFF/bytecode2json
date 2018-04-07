@@ -37,8 +37,8 @@ public class CONSTANT_InvokeDynamic_info extends CPInfo {
         return "CONSTANT_InvokeDynamic_info[bootstrap_method_index: " + bootstrap_method_attr_index + ", name_and_type_index: " + name_and_type_index + "]";
     }
 
-    public <R, D> R accept(Visitor<R, D> visitor, D data) {
-        return visitor.visitInvokeDynamic(this, data);
+    public void accept(CPVisitor visitor) {
+        visitor.visitInvokeDynamic(this);
     }
 
     public CONSTANT_NameAndType_info getNameAndTypeInfo() throws ConstantPoolException {

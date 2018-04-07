@@ -33,7 +33,7 @@ public  abstract class CPInfo {
 
     public abstract int byteLength();
 
-    public abstract <R,D> R accept(Visitor<R,D> visitor, D data);
+    public abstract void accept(CPVisitor visitor);
 
     protected final ConstantPool cp;
 }

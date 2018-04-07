@@ -132,7 +132,7 @@ public abstract class Attribute {
         return constant_pool.getUTF8Value(attribute_name_index);
     }
 
-    public abstract <R,D> R accept(Attribute.Visitor<R,D> visitor, D data);
+    public abstract <R,D> R accept(Attribute.CPVisitor<R,D> visitor, D data);
 
     public int byteLength() {
         return 6 + attribute_length;
@@ -142,7 +142,7 @@ public abstract class Attribute {
     public final int attribute_length;*/
 
 /*
-    public interface Visitor<R,P> {
+    public interface CPVisitor<R,P> {
         R visitBootstrapMethods(BootstrapMethods_attribute attr, P p);
         R visitDefault(DefaultAttribute attr, P p);
         R visitAnnotationDefault(AnnotationDefault_attribute attr, P p);

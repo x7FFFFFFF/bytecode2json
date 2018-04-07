@@ -32,8 +32,8 @@ public class CONSTANT_Integer_info extends CPInfo {
         return "CONSTANT_Integer_info[value: " + value + "]";
     }
 
-    public <R, D> R accept(Visitor<R, D> visitor, D data) {
-        return visitor.visitInteger(this, data);
+    public void accept(CPVisitor visitor) {
+        visitor.visitInteger(this);
     }
 
     public final int value;

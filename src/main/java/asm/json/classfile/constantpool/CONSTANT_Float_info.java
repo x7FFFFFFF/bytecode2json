@@ -32,8 +32,8 @@ public  class CONSTANT_Float_info extends CPInfo {
         return "CONSTANT_Float_info[value: " + value + "]";
     }
 
-    public <R, D> R accept(Visitor<R, D> visitor, D data) {
-        return visitor.visitFloat(this, data);
+    public void accept(CPVisitor visitor) {
+        visitor.visitFloat(this);
     }
 
     public final float value;

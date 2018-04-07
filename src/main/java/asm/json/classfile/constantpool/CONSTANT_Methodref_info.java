@@ -24,7 +24,7 @@ public   class CONSTANT_Methodref_info extends CPRefInfo {
         return "CONSTANT_Methodref_info[class_index: " + class_index + ", name_and_type_index: " + name_and_type_index + "]";
     }
 
-    public <R, D> R accept(Visitor<R, D> visitor, D data) {
-        return visitor.visitMethodref(this, data);
+    public void accept(CPVisitor visitor) {
+        visitor.visitMethodref(this);
     }
 }

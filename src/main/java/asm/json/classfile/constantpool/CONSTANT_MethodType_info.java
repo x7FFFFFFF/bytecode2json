@@ -35,8 +35,8 @@ public class CONSTANT_MethodType_info extends CPInfo {
         return "CONSTANT_MethodType_info[signature_index: " + descriptor_index + "]";
     }
 
-    public <R, D> R accept(Visitor<R, D> visitor, D data) {
-        return visitor.visitMethodType(this, data);
+    public void accept(CPVisitor visitor) {
+        visitor.visitMethodType(this);
     }
 
     public String getType() throws ConstantPoolException {

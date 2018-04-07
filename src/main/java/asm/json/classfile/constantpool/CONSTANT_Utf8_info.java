@@ -56,8 +56,8 @@ public  class CONSTANT_Utf8_info extends CPInfo {
         return true;
     }
 
-    public <R, D> R accept(Visitor<R, D> visitor, D data) {
-        return visitor.visitUtf8(this, data);
+    public void accept(CPVisitor visitor) {
+        visitor.visitUtf8(this);
     }
 
     public final String value;

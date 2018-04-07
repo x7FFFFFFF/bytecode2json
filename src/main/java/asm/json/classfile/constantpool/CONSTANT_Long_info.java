@@ -37,8 +37,8 @@ public class CONSTANT_Long_info extends CPInfo {
         return "CONSTANT_Long_info[value: " + value + "]";
     }
 
-    public <R, D> R accept(Visitor<R, D> visitor, D data) {
-        return visitor.visitLong(this, data);
+    public void accept(CPVisitor visitor) {
+        visitor.visitLong(this);
     }
 
     public final long value;

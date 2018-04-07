@@ -37,8 +37,8 @@ public  class CONSTANT_MethodHandle_info extends CPInfo {
         return "CONSTANT_MethodHandle_info[ref_kind: " + reference_kind + ", member_index: " + reference_index + "]";
     }
 
-    public <R, D> R accept(Visitor<R, D> visitor, D data) {
-        return visitor.visitMethodHandle(this, data);
+    public void accept(CPVisitor visitor) {
+        visitor.visitMethodHandle(this);
     }
 
     public CPRefInfo getCPRefInfo() throws ConstantPoolException {

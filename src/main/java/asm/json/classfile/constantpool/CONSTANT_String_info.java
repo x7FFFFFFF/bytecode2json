@@ -34,8 +34,8 @@ public  class CONSTANT_String_info extends CPInfo {
         return cp.getUTF8Value(string_index);
     }
 
-    public <R, D> R accept(Visitor<R, D> visitor, D data) {
-        return visitor.visitString(this, data);
+    public void accept(CPVisitor visitor) {
+        visitor.visitString(this);
     }
 
     @Override

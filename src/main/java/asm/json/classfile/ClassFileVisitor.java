@@ -1,7 +1,6 @@
 package asm.json.classfile;
 
-import asm.json.classfile.constantpool.CPVisitor;
-import asm.json.classfile.constantpool.ConstantPool;
+import asm.json.classfile.constantpool.ConstPoolVisitor;
 import asm.json.common.IVisitElement;
 
 /**
@@ -31,7 +30,7 @@ public interface ClassFileVisitor  extends IVisitElement{
     void visitMinorVersion(int minorVersion);
     void visitMajorVersion(int majorVersion);
     void visitConstantPoolCount(int count);
-    CPVisitor visitConstantPool(ConstantPool constantPool);
+    ConstPoolVisitor visitConstantPool(int constantPoolCount);
 
 
 }

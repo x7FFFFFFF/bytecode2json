@@ -1,9 +1,8 @@
 package asm.json.classfile;
 
-import asm.json.classfile.constantpool.CPVisitor;
-import asm.json.classfile.constantpool.ConstantPool;
+import asm.json.classfile.constantpool.ConstPoolVisitor;
+import asm.json.classfile.constantpool.ConstantPoolWalker;
 
-import java.io.InputStream;
 import java.util.concurrent.Callable;
 
 /**
@@ -23,11 +22,19 @@ public class ClassFileWalker implements Callable<Boolean> {
         visitor.visitMagic(cr.readInt());
         visitor.visitMinorVersion(cr.readUnsignedShort());
         visitor.visitMajorVersion(cr.readUnsignedShort());
-        ConstantPool constantPool = new ConstantPool(cr);
-        visitor.visitConstantPoolCount(constantPool.size());
-        final CPVisitor cpVisitor = visitor.visitConstantPool(constantPool);
+
+        int constantPoolCount = cr.readUnsignedShort();
+        visitor.visitConstantPoolCount(constantPoolCount);
+
+       // ConstantPool constantPool = new ConstantPool(cr);
+
+        final ConstPoolVisitor cpVisitor = visitor.visitConstantPool(constantPoolCount);
         cpVisitor.visitStart();
-        constantPool.entries().forEach(e->e.accept(cpVisitor));
+        final ConstantPoolWalker constantPoolWalker = new ConstantPoolWalker(cr, cpVisitor, constantPoolCount);
+
+        if (!constantPoolWalker.call()) {
+            throw new Exception("constantPoolWalker.call()");
+        }
         cpVisitor.visitEnd();
         visitor.visitEnd();
         return true;

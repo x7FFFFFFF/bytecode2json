@@ -1,8 +1,7 @@
 package asm.json.common;
 
 import asm.json.classfile.ClassFileVisitor;
-import asm.json.classfile.constantpool.CPVisitor;
-import asm.json.classfile.constantpool.ConstantPool;
+import asm.json.classfile.constantpool.ConstPoolVisitor;
 import asm.json.common.printer.ILinePrinter;
 
 /**
@@ -38,7 +37,7 @@ public class SimpleClassFileVisitor implements ClassFileVisitor{
     }
 
     @Override
-    public CPVisitor visitConstantPool(ConstantPool constantPool) {
+    public ConstPoolVisitor visitConstantPool(int constantPoolCount) {
         return new SimpleCPVisitor(printer);
     }
 

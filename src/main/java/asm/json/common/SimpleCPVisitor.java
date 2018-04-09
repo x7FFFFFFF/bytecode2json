@@ -1,6 +1,7 @@
 package asm.json.common;
 
-import asm.json.classfile.constantpool.*;
+import asm.json.classfile.constantpool.ConstPoolVisitor;
+import asm.json.classfile.constantpool.constants.*;
 import asm.json.common.printer.ILinePrinter;
 
 import java.util.function.Consumer;
@@ -8,9 +9,10 @@ import java.util.function.Consumer;
 /**
  * Created on 07.04.2018.
  */
-public class SimpleCPVisitor implements CPVisitor {
+public class SimpleCPVisitor implements ConstPoolVisitor {
     private final ILinePrinter printer;
     private int counter;
+
 
     public SimpleCPVisitor(ILinePrinter lp) {
         this.printer = lp;
@@ -21,7 +23,7 @@ public class SimpleCPVisitor implements CPVisitor {
             u2 name_index;
         }
     */
-    private <T extends CPInfo> void wrap(T value, Consumer<T> consumer){
+    private <T extends ICPinfo> void wrap(T value, Consumer<T> consumer){
         counter++;
         printer.printlnf("%d:{", counter);
         printer.indent(1);
@@ -32,7 +34,7 @@ public class SimpleCPVisitor implements CPVisitor {
     }
 
     @Override
-    public void visitClass(CONSTANT_Class_info info) {
+    public void visitClass(ConstantClassInfo info) {
         wrap(info, i-> printer.printlnf("name_index:%d,", info.name_index));
      }
 
@@ -42,7 +44,7 @@ public class SimpleCPVisitor implements CPVisitor {
         u4 low_bytes;
     }*/
     @Override
-    public void visitDouble(CONSTANT_Double_info info) {
+    public void visitDouble(ConstantDoubleInfo info) {
         wrap(info, i-> printer.printlnf("value:%f,", i.value)); //TODO
 
     }
@@ -52,7 +54,7 @@ public class SimpleCPVisitor implements CPVisitor {
         u2 name_and_type_index;
     }*/
     @Override
-    public void visitFieldref(CONSTANT_Fieldref_info info) {
+    public void visitFieldref(ConstantFieldrefInfo info) {
         wrap(info, i-> {
             printer.printlnf("class_index:%d,", i.class_index);
             printer.printlnf("name_and_type_index:%d,", i.name_and_type_index);
@@ -64,7 +66,7 @@ public class SimpleCPVisitor implements CPVisitor {
         u4 bytes;
     }*/
     @Override
-    public void visitFloat(CONSTANT_Float_info info) {
+    public void visitFloat(ConstantFloatInfo info) {
         wrap(info, i-> printer.printlnf("value:%f,", i.value)); //TODO
 
     }
@@ -73,7 +75,7 @@ public class SimpleCPVisitor implements CPVisitor {
         u4 bytes;
     }*/
     @Override
-    public void visitInteger(CONSTANT_Integer_info info) {
+    public void visitInteger(ConstantIntegerInfo info) {
         wrap(info, i-> printer.printlnf("value:%d,", i.value)); //TODO
 
     }
@@ -83,7 +85,7 @@ public class SimpleCPVisitor implements CPVisitor {
         u2 name_and_type_index;
     }*/
     @Override
-    public void visitInterfaceMethodref(CONSTANT_InterfaceMethodref_info info) {
+    public void visitInterfaceMethodref(ConstantInterfacemethodrefInfo info) {
         wrap(info, i-> {
             printer.printlnf("class_index:%d,", i.class_index);
             printer.printlnf("name_and_type_index:%d,", i.name_and_type_index);
@@ -96,7 +98,7 @@ public class SimpleCPVisitor implements CPVisitor {
         u2 name_and_type_index;
     }*/
     @Override
-    public void visitInvokeDynamic(CONSTANT_InvokeDynamic_info info) {
+    public void visitInvokeDynamic(ConstantInvokedynamicInfo info) {
         wrap(info, i-> {
             printer.printlnf("bootstrap_method_attr_index:%d,", i.bootstrap_method_attr_index);
             printer.printlnf("name_and_type_index:%d,", i.name_and_type_index);
@@ -109,7 +111,7 @@ public class SimpleCPVisitor implements CPVisitor {
         u4 low_bytes;
     }*/
     @Override
-    public void visitLong(CONSTANT_Long_info info) {
+    public void visitLong(ConstantLongInfo info) {
         wrap(info, i-> printer.printlnf("value:%d,", i.value)); //TODO
 
     }
@@ -119,7 +121,7 @@ public class SimpleCPVisitor implements CPVisitor {
         u2 descriptor_index;
     }*/
     @Override
-    public void visitNameAndType(CONSTANT_NameAndType_info info) {
+    public void visitNameAndType(ConstantNameandtypeInfo info) {
         wrap(info, i-> {
             printer.printlnf("name_index:%d,", i.name_index);
             printer.printlnf("descriptor_index:%d,", i.type_index);
@@ -132,7 +134,7 @@ public class SimpleCPVisitor implements CPVisitor {
         u2 name_and_type_index;
     }*/
     @Override
-    public void visitMethodref(CONSTANT_Methodref_info info) {
+    public void visitMethodref(ConstantMethodrefInfo info) {
         wrap(info, i-> {
             printer.printlnf("class_index:%d,", i.class_index);
             printer.printlnf("name_and_type_index:%d,", i.name_and_type_index);
@@ -145,7 +147,7 @@ public class SimpleCPVisitor implements CPVisitor {
         u2 reference_index;
     }*/
     @Override
-    public void visitMethodHandle(CONSTANT_MethodHandle_info info) {
+    public void visitMethodHandle(ConstantMethodhandleInfo info) {
         wrap(info, i-> {
             printer.printlnf("reference_kind:%d,", i.reference_kind);  //TODO
             printer.printlnf("reference_index:%d,", i.reference_index);
@@ -157,7 +159,7 @@ public class SimpleCPVisitor implements CPVisitor {
         u2 descriptor_index;
     }*/
     @Override
-    public void visitMethodType(CONSTANT_MethodType_info info) {
+    public void visitMethodType(ConstantMethodtypeInfo info) {
         wrap(info, i-> printer.printlnf("descriptor_index:%d,", i.descriptor_index));
 
     }
@@ -166,7 +168,7 @@ public class SimpleCPVisitor implements CPVisitor {
         u2 string_index;
     }*/
     @Override
-    public void visitString(CONSTANT_String_info info) {
+    public void visitString(ConstantStringInfo info) {
         wrap(info, i-> printer.printlnf("string_index:%d,", i.string_index));
 
     }
@@ -176,7 +178,7 @@ public class SimpleCPVisitor implements CPVisitor {
         u1 bytes[length];
     }*/
     @Override
-    public void visitUtf8(CONSTANT_Utf8_info info) {
+    public void visitUtf8(ConstantUtf8Info info) {
         wrap(info, i-> printer.printlnf("value:\"%s\",", i.value));
 
     }

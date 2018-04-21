@@ -1,6 +1,6 @@
 /*****************************************************************
- * Gridnine AB http://www.gridnine.com
- * Project: BOF VIP-Service
+ *
+ *
  *
  * $Id: ConstantRefInfo.java 2018-04-09 9:45 paramonov $
  *****************************************************************/
@@ -27,6 +27,7 @@ public abstract class ConstantRefInfo   implements IAcceptable, ICPinfo {
     public int byteLength() {
         return 5;
     }
+
 
 
 

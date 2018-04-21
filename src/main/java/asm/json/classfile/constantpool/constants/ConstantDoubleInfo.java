@@ -32,6 +32,8 @@ public class ConstantDoubleInfo implements IAcceptable, ICPinfo {
         return 2;
     }
 
+
+
     @Override
     public String toString() {
         return "CONSTANT_Double_info[value: " + value + "]";
@@ -41,5 +43,5 @@ public class ConstantDoubleInfo implements IAcceptable, ICPinfo {
         visitor.visitDouble(this);
     }
 
-    public final double value;
+    public  double value;
 }

@@ -25,4 +25,6 @@ public class ConstantFieldrefInfo extends ConstantRefInfo {
     public void accept(ConstPoolVisitor visitor) {
         visitor.visitFieldref(this);
     }
+
+
 }

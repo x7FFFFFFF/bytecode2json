@@ -31,6 +31,12 @@ public interface ClassFileVisitor  extends IVisitElement{
     void visitMajorVersion(int majorVersion);
     void visitConstantPoolCount(int count);
     ConstPoolVisitor visitConstantPool(int constantPoolCount);
-
+    void visitAccessFlags(int accessFlag);
+    void visitThisClass(int thisClass);
+    void visitSuperClass(int superClass);
+    void visitInterfacesCount(int interfacesCount);
+    InterfacesVisitor visitInterfaces(int interfacesCount);
+    void visitFieldsCount(int fieldsCount);
+    FieldsVisitor visitFields();
 
 }

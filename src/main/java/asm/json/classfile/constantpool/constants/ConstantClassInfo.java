@@ -9,9 +9,11 @@ package asm.json.classfile.constantpool.constants;
 import asm.json.classfile.ClassReader;
 import asm.json.classfile.constantpool.CPInfoTypes;
 import asm.json.classfile.constantpool.ConstPoolVisitor;
+import asm.json.classfile.constantpool.PoolConstants;
 
 import java.io.IOException;
 
+@PoolConstants
 public class ConstantClassInfo implements IAcceptable, ICPinfo {
     public ConstantClassInfo(ClassReader cr) throws IOException {
         name_index = cr.readUnsignedShort();
@@ -36,7 +38,8 @@ public class ConstantClassInfo implements IAcceptable, ICPinfo {
         visitor.visitClass(this);
     }
 
-    public final int name_index;
+    public  int name_index;
+
 
 
 }

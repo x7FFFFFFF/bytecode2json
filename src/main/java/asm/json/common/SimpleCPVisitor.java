@@ -35,7 +35,7 @@ public class SimpleCPVisitor implements ConstPoolVisitor {
 
     @Override
     public void visitClass(ConstantClassInfo info) {
-        wrap(info, i-> printer.printlnf("name_index:%d,", info.name_index));
+        wrap(info, i-> printer.printlnf("name_index:%d,", i.name_index));
      }
 
   /*  CONSTANT_Double_info {

@@ -30,10 +30,7 @@ public class ConstantPoolWalker implements Callable<Boolean> {
     private final ClassReader cr;
     private final int count;
 
-    static {
-        final Package aPackage = Package.getPackage("asm.json.classfile.constantpool.constants");
 
-    }
 
 
 

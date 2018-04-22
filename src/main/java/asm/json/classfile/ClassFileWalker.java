@@ -3,6 +3,7 @@ package asm.json.classfile;
 import asm.json.classfile.attributes.AttributeVisitor;
 import asm.json.classfile.attributes.AttributesWalker;
 import asm.json.classfile.constantpool.ConstPoolVisitor;
+import asm.json.classfile.constantpool.ConstantPool;
 import asm.json.classfile.constantpool.ConstantPoolWalker;
 
 import java.util.concurrent.Callable;
@@ -56,9 +57,8 @@ public class ClassFileWalker implements Callable<Boolean> {
         cpVisitor.visitStart();
         final ConstantPoolWalker constantPoolWalker = new ConstantPoolWalker(cr, cpVisitor, constantPoolCount);
 
-        if (!constantPoolWalker.call()) {
-            throw new Exception("constantPoolWalker.call()");
-        }
+        final ConstantPool constantPool = constantPoolWalker.call();
+
         cpVisitor.visitEnd();
 
         visitor.visitAccessFlags(cr.readUnsignedShort());

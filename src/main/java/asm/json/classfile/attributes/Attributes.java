@@ -4,11 +4,12 @@
  *
  * $Id: Attributes.java 2018-04-06 18:04 paramonov $
  *****************************************************************/
-package asm.json.classfile;
+package asm.json.classfile.attributes;
+
+import asm.json.classfile.ClassReader;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 

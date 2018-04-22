@@ -7,32 +7,17 @@
 package asm.json.classfile.constantpool;
 
 import asm.json.classfile.ClassReader;
-import asm.json.classfile.constantpool.constants.ConstantClassInfo;
-import asm.json.classfile.constantpool.constants.ConstantDoubleInfo;
-import asm.json.classfile.constantpool.constants.ConstantFieldrefInfo;
-import asm.json.classfile.constantpool.constants.ConstantFloatInfo;
-import asm.json.classfile.constantpool.constants.ConstantIntegerInfo;
-import asm.json.classfile.constantpool.constants.ConstantInvokedynamicInfo;
-import asm.json.classfile.constantpool.constants.ConstantLongInfo;
-import asm.json.classfile.constantpool.constants.ConstantMethodhandleInfo;
-import asm.json.classfile.constantpool.constants.ConstantMethodrefInfo;
-import asm.json.classfile.constantpool.constants.ConstantMethodtypeInfo;
-import asm.json.classfile.constantpool.constants.ConstantNameandtypeInfo;
-import asm.json.classfile.constantpool.constants.ConstantStringInfo;
-import asm.json.classfile.constantpool.constants.ConstantUtf8Info;
+import asm.json.classfile.constantpool.constants.*;
 import asm.json.classfile.constantpool.exeptions.InvalidEntry;
+import com.sun.org.apache.bcel.internal.classfile.ConstantInterfaceMethodref;
 
 import java.util.concurrent.Callable;
 
-public class ConstantPoolWalker implements Callable<Boolean> {
+public class ConstantPoolWalker implements Callable<ConstantPool> {
 
     private final ConstPoolVisitor  visitor;
     private final ClassReader cr;
     private final int count;
-
-
-
-
 
     public ConstantPoolWalker( ClassReader cr, ConstPoolVisitor visitor, int count) {
         this.visitor = visitor;
@@ -40,71 +25,96 @@ public class ConstantPoolWalker implements Callable<Boolean> {
         this.count = count;
     }
 
-
-
-
-
     @Override
-    public Boolean call() throws Exception {
+    public ConstantPool call() throws Exception {
+        ConstantPool res = new ConstantPool(count);
         for (int i = 1; i < count; i++) {
             int tag = cr.readUnsignedByte();
             switch (tag) {
                 case CPInfoTypes.CONSTANT_Class:
-                    new ConstantClassInfo(cr).accept(visitor);
+                    final ConstantClassInfo constantClassInfo = new ConstantClassInfo(cr);
+                    res.set(i, constantClassInfo);
+                    constantClassInfo.accept(visitor);
                     break;
 
                 case CPInfoTypes.CONSTANT_Double:
-                     new ConstantDoubleInfo(cr).accept(visitor);
+                    final ConstantDoubleInfo constantDoubleInfo = new ConstantDoubleInfo(cr);
+                    res.set(i, constantDoubleInfo);
+                    constantDoubleInfo.accept(visitor);
                     i++;
                     break;
 
                 case CPInfoTypes.CONSTANT_Fieldref:
-                     new ConstantFieldrefInfo(cr).accept(visitor);
+                    final ConstantFieldrefInfo constantFieldrefInfo = new ConstantFieldrefInfo(cr);
+                    res.set(i, constantFieldrefInfo);
+                    constantFieldrefInfo.accept(visitor);
                     break;
 
                 case CPInfoTypes.CONSTANT_Float:
-                     new ConstantFloatInfo(cr).accept(visitor);
+                    final ConstantFloatInfo constantFloatInfo = new ConstantFloatInfo(cr);
+                    res.set(i, constantFloatInfo);
+                    constantFloatInfo.accept(visitor);
                     break;
 
                 case CPInfoTypes.CONSTANT_Integer:
-                     new ConstantIntegerInfo(cr).accept(visitor);
+                    final ConstantIntegerInfo constantIntegerInfo = new ConstantIntegerInfo(cr);
+                    res.set(i, constantIntegerInfo);
+                    constantIntegerInfo.accept(visitor);
                     break;
 
                 case CPInfoTypes.CONSTANT_InterfaceMethodref:
-                     new ConstantIntegerInfo(cr).accept(visitor);
+                    final ConstantInterfacemethodrefInfo constantInterfaceMethodref = new ConstantInterfacemethodrefInfo(cr);
+                    res.set(i, constantInterfaceMethodref);
+                    constantInterfaceMethodref.accept(visitor);
                     break;
 
                 case CPInfoTypes.CONSTANT_InvokeDynamic:
-                     new ConstantInvokedynamicInfo(cr).accept(visitor);
+                    final ConstantInvokedynamicInfo constantInvokedynamicInfo = new ConstantInvokedynamicInfo(cr);
+                    res.set(i, constantInvokedynamicInfo);
+                    constantInvokedynamicInfo.accept(visitor);
                     break;
 
                 case CPInfoTypes.CONSTANT_Long:
-                     new ConstantLongInfo(cr).accept(visitor);
+                    final ConstantLongInfo constantLongInfo = new ConstantLongInfo(cr);
+                    res.set(i, constantLongInfo);
+                    constantLongInfo.accept(visitor);
                     i++;
                     break;
 
                 case CPInfoTypes.CONSTANT_MethodHandle:
-                     new ConstantMethodhandleInfo(cr).accept(visitor);
+                    final ConstantMethodhandleInfo constantMethodhandleInfo = new ConstantMethodhandleInfo(cr);
+                    res.set(i, constantMethodhandleInfo);
+                    constantMethodhandleInfo.accept(visitor);
                     break;
 
                 case CPInfoTypes.CONSTANT_MethodType:
-                     new ConstantMethodtypeInfo(cr).accept(visitor);
+                    final ConstantMethodtypeInfo constantMethodtypeInfo = new ConstantMethodtypeInfo(cr);
+                    res.set(i, constantMethodtypeInfo);
+                    constantMethodtypeInfo.accept(visitor);
                     break;
 
                 case CPInfoTypes.CONSTANT_Methodref:
-                     new ConstantMethodrefInfo(cr).accept(visitor);
+                    final ConstantMethodrefInfo constantMethodrefInfo = new ConstantMethodrefInfo(cr);
+                    res.set(i, constantMethodrefInfo);
+                    constantMethodrefInfo.accept(visitor);
                     break;
 
                 case CPInfoTypes.CONSTANT_NameAndType:
-                     new ConstantNameandtypeInfo(cr).accept(visitor);
+                    final ConstantNameandtypeInfo constantNameandtypeInfo = new ConstantNameandtypeInfo(cr);
+                    res.set(i, constantNameandtypeInfo);
+                    constantNameandtypeInfo.accept(visitor);
                     break;
 
                 case CPInfoTypes.CONSTANT_String:
-                     new ConstantStringInfo(cr).accept(visitor);
+                    final ConstantStringInfo constantStringInfo = new ConstantStringInfo(cr);
+                    res.set(i, constantStringInfo);
+                    constantStringInfo.accept(visitor);
                     break;
 
                 case CPInfoTypes.CONSTANT_Utf8:
-                     new ConstantUtf8Info(cr).accept(visitor);
+                    final ConstantUtf8Info constantUtf8Info = new ConstantUtf8Info(cr);
+                    res.set(i, constantUtf8Info);
+                    constantUtf8Info.accept(visitor);
                     break;
 
                 default:
@@ -112,6 +122,6 @@ public class ConstantPoolWalker implements Callable<Boolean> {
             }
         }
 
-        return true;
+        return res;
     }
 }

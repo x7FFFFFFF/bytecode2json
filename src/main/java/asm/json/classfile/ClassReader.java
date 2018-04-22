@@ -6,10 +6,9 @@
  *****************************************************************/
 package asm.json.classfile;
 
-import java.io.BufferedInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import asm.json.classfile.attributes.Attribute;
+
+import java.io.*;
 
 public class ClassReader  implements AutoCloseable{
 
@@ -55,4 +54,19 @@ public class ClassReader  implements AutoCloseable{
     public String readUTF() throws IOException {
         return in.readUTF();
     }
+
+ /*   public Attribute readAttribute() throws IOException {
+        int name_index = readUnsignedShort();
+        int length = readInt();
+        byte[] data = new byte[length];
+        readFully(data);
+
+        DataInputStream prev = in;
+        in = new DataInputStream(new ByteArrayInputStream(data));
+        try {
+            return attributeFactory.createAttribute(this, name_index, data);
+        } finally {
+            in = prev;
+        }
+    }*/
 }

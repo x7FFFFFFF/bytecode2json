@@ -20,16 +20,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class ReaderTest {
 
-    @Test
-    public void test() throws Exception {
-        try( final ClassReader classReader = new ClassReader(ReaderTest.class.getResourceAsStream("Main.class"))) {
-            final ClassFile classFile = new ClassFile(classReader);
-            final ConstantPool constantPool = classFile.constant_pool;
-            assertEquals(48, constantPool.size());
 
-        }
-
-    }
 
     @Test
     public void testWalker() throws Exception {

@@ -14,7 +14,7 @@ import asm.json.classfile.constantpool.ConstantPool;
 import java.io.IOException;
 
 public class ConstantInterfacemethodrefInfo extends ConstantRefInfo  {
-    public ConstantInterfacemethodrefInfo(ConstantPool cp, ClassReader cr) throws IOException {
+    public ConstantInterfacemethodrefInfo( ClassReader cr) throws IOException {
         super( cr, CPInfoTypes.CONSTANT_InterfaceMethodref);
     }
 
